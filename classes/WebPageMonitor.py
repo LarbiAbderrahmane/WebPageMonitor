@@ -19,7 +19,7 @@ class WebPageMonitor:
 
     def findText(self, html):
         dom = etree.HTML(html)
-        founds = dom.xpath("/html/body//*[name()!='script'][text()]")
+        founds = dom.xpath("/html/body//*[name()!='script' and name()!='style'][text()]")
         texts = list(map(Helper.getText, founds))
         return texts
 

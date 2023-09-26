@@ -11,7 +11,8 @@ output = open("result.out", "w")
 while True:
     for url in urls:
         print(f"***** {url} *****")
-        result = url + " : " + "recorded at " + datetime.now().isoformat().replace("T", " ") + "\n"
+        result = f"***** {url} *****"
+        result += url + " : " + "recorded at " + datetime.now().isoformat().replace("T", " ") + "\n"
         oldPageName = "old_pages/" + Helper.getFileNameFrom(url)
         if os.path.isfile(oldPageName):
             with open(oldPageName, "r") as f:
