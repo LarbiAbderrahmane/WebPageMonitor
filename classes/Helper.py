@@ -12,5 +12,5 @@ class Helper:
     def getDifference(new, old):
         return [t for t in new if not (t in old)]
 
-    def getFileNameFrom(url):
-        return "".join(re.findall("\w+", urllib.parse.urlparse(url).netloc)) + ".html"
+    def getFileNameFrom(url: str):
+        return "".join(re.findall("\w+", url)) + ".html"

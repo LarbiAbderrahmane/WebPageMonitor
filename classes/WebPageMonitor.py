@@ -11,8 +11,8 @@ class WebPageMonitor:
         self.html = response.text
         self.oldHTML = oldHTML
 
-    def addHttpPrefix(self, domain):
-        if not ("http://" in domain):
+    def addHttpPrefix(self, domain: str):
+        if domain.startswith("/"):
             return self.url + urllib.parse.quote(domain)
         else:
             return domain
