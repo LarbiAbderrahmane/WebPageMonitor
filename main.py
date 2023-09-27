@@ -3,16 +3,18 @@ from classes.Helper import Helper
 from datetime import datetime
 import time
 import os.path
+from classes.MyTelegramBot import MyTelegramBot
 
 
 urls = list(map(lambda e: e.strip("\n"), open("urls.in", "r").readlines()))
 
-output = open("result.out", "w")
+output = open("result.out", "a")
+telegram = MyTelegramBot()
 while True:
     for url in urls:
         print(f"***** {url} *****")
         result = f"***** {url} *****"
-        result += url + " : " + "recorded at " + datetime.now().isoformat().replace("T", " ") + "\n"
+        result += "\nrecorded at " + datetime.now().isoformat().replace("T", " ") + "\n"
         oldPageName = "old_pages/" + Helper.getFileNameFrom(url)
         if os.path.isfile(oldPageName):
             with open(oldPageName, "r") as f:
@@ -33,6 +35,7 @@ while True:
             if len(textDifferences) > 0 or len(linksDifferences) > 0:
                 print(result)
                 output.write(result)
+                telegram.sendMessage(result)
                 with open(oldPageName, "w") as f:
                     f.write(monitor.getNewHTML())
 
