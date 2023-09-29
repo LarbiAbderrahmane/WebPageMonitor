@@ -6,7 +6,7 @@ from classes.Helper import Helper
 
 class WebPageMonitor:
     def __init__(self, url, oldHTML):
-        response = requests.get(url)
+        response = requests.get(url, timeout=5)
         self.url = url
         self.html = response.text
         self.oldHTML = oldHTML
