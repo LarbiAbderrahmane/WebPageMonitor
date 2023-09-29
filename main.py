@@ -9,6 +9,7 @@ from classes.MyTelegramBot import MyTelegramBot
 urls = list(map(lambda e: e.strip("\n"), open("urls.in", "r").readlines()))
 
 output = open("result.out", "a")
+log = open("log.txt", "a")
 telegram = MyTelegramBot()
 while True:
     for url in urls:
@@ -41,7 +42,9 @@ while True:
                 with open(oldPageName, "w") as f:
                     f.write(WebPageMonitor(url, None).getNewHTML())
         except Exception as e:
-            print("something went wrong\n" + "error: " + str(e))
+            print("something went wrong\n")
+            log.write(f"--> {e}\n")
+            log.write(f"==> at:{datetime.now().isoformat().replace('T', ' ')}\n")
             continue
     print("----- checking changes after 5 minutes... -----")
     time.sleep(5*60)
